@@ -8,8 +8,8 @@ function rpi {
     ssh saksham@192.168.1.85
 }
 
-function winutil{
-    irm "https://christitus.com/win" | iex
+function witil{
+    $argument = pwsh.exe -ExecutionPolicy Bypass -Command "Start-Process powershell.exe -verb runas -ArgumentList 'irm https://christitus.com/win | iex'" 
 }
 
 function adbi
