@@ -22,7 +22,7 @@ function adbi
     {
         if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
             {
-                $newProcess = Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+                Write-Output "Run with admin privilages."
                 exit
             }
         Invoke-WebRequest -Uri $url -OutFile $loc
