@@ -70,3 +70,9 @@ function phone{
 function find{
     nano $(fzf --preview="bat --color=always {}")
 }
+
+function of{
+    shutdown -a
+    $sec=$args[0]*60
+    shutdown -s -t $sec
+}
