@@ -44,12 +44,14 @@ function phone{
     }
     $port= $args[0]
     $out = adb connect 192.168.1.100:$port
+    Start-Sleep -Seconds 5
     if ($out -match "connected to"){
         Write-Output "Connected to Moto"
     }
     else{
         $new=Read-Host "Enter a different IP and Port: "
         $out1= adb connect $new
+        Start-Sleep -Seconds 5
         if ($out1 -match "connected to") {
             Write-Output "Connected to Moto"
         }
@@ -57,6 +59,7 @@ function phone{
             Write-Output "Unable to connect. Entering pairing mode"
             $pair = Read-Host "Enter the IP and Port: "
             $out2= adb pair $pair
+            Start-Sleep -Seconds 5
             if ($out2 -match "Successfully paired to"){
                 Write-Output "Paired and connected to Moto"
             }
@@ -75,4 +78,8 @@ function of{
     shutdown -a
     $sec=$args[0]*60
     shutdown -s -t $sec
+}
+
+function zuku{
+    adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.sh
 }
