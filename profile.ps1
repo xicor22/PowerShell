@@ -83,3 +83,10 @@ function of{
 function zuku{
     adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.sh
 }
+
+function deej{
+    taskkill /IM deej.exe /F > $null 2>&1
+    cd C:\Tools\Deej
+    .\deej.exe
+    cd
+}
