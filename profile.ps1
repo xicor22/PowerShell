@@ -8,7 +8,7 @@ function rpi {
     ssh saksham@192.168.1.85
 }
 
-function adbi
+function adbi   #untested
 {
     $url="https://dl.google.com/android/repository/platform-tools-latest-windows.zip"
     $loc= "C:\platform-tools-latest-windows.zip"
@@ -21,12 +21,15 @@ function adbi
                 Write-Output "Run with admin privilages."
                 exit
             }
-        Invoke-WebRequest -Uri $url -OutFile $loc
-        Add-Type -AssemblyName System.IO.Compression.FileSystem
-        [System.IO.Compression.ZipFile]::ExtractToDirectory($loc, $unziploc)
-        Rename_Item "$loc adb"
-        [System.Environment]::SetEnvironmentVariable('Path', $env:Path + ';C:\adb', [System.EnvironmentVariableTarget]::User)
-        [System.Environment]::SetEnvironmentVariable('Path', $env:Path + ';C:\adb', [System.EnvironmentVariableTarget]::Machine)
+
+        else{
+            Invoke-WebRequest -Uri $url -OutFile $loc
+            Add-Type -AssemblyName System.IO.Compression.FileSystem
+            [System.IO.Compression.ZipFile]::ExtractToDirectory($loc, $unziploc)
+            Rename_Item "$loc adb"
+            [System.Environment]::SetEnvironmentVariable('Path', $env:Path + ';C:\adb', [System.EnvironmentVariableTarget]::User)
+            [System.Environment]::SetEnvironmentVariable('Path', $env:Path + ';C:\adb', [System.EnvironmentVariableTarget]::Machine)
+            }
     }
 }
 
@@ -75,7 +78,7 @@ function find{
 }
 
 function of{
-    shutdown -a >$null 2>&1
+    $null = shutdown -a 
     $sec=$args[0]*60
     shutdown -s -t $sec
 }
@@ -85,7 +88,7 @@ function zuku{
 }
 
 function deej{
-    taskkill /IM deej.exe /F >$null 2>&1
+    $null = taskkill /IM deej.exe /F 
     cd C:\Tools\Deej
     .\deej.exe
     cd
