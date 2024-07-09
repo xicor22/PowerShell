@@ -75,7 +75,7 @@ function find{
 }
 
 function of{
-    shutdown -a
+    shutdown -a > $null 2>&1
     $sec=$args[0]*60
     shutdown -s -t $sec
 }
