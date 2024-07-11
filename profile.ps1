@@ -78,7 +78,7 @@ function find{
 }
 
 function of{
-    $null = shutdown -a 
+    shutdown -a >$null 2>&1
     $sec=$args[0]*60
     shutdown -s -t $sec
 }
@@ -88,7 +88,7 @@ function zuku{
 }
 
 function deej{
-    $null = taskkill /IM deej.exe /F 
+    taskkill /IM deej.exe /F >$null 2>&1
     cd C:\Tools\Deej
     .\deej.exe
     cd
