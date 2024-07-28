@@ -93,3 +93,11 @@ function deej{
     .\deej.exe
     cd
 }
+
+function cat {
+    bat @args
+}
+
+Set-Alias cat bat
+
+Set-Alias ccd zi
