@@ -1,10 +1,12 @@
 oh-my-posh init pwsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json | Invoke-Expression
 
 function haos {
+    clear
     ssh -m hmac-sha2-512-etm@openssh.com hassio@192.168.1.215
 }
 
 function rpi {
+    clear
     ssh saksham@192.168.1.85
 }
 
@@ -94,10 +96,11 @@ function deej{
     cd
 }
 
-function cat {
-    bat @args
-}
-
 Set-Alias cat bat
 
 Set-Alias ccd zi
+
+function wrt{
+    clear
+    ssh root@192.168.1.1
+}
