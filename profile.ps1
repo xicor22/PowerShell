@@ -50,32 +50,33 @@ function phone{
         return
     }
     $port= $args[0]
-    $out = adb connect 192.168.1.100:$port >$null 2>&1
+    $out = adb connect 192.168.1.100:$port 2>&1
     Start-Sleep -Seconds 5
     if ($out -match "connected to"){
         Write-Output "Connected to Moto"
+        return
     }
-    else{
-        $new=Read-Host "Enter a different IP and Port: "
-        $out1= adb connect $new >$null 2>&1
+    $new=Read-Host "Enter a different IP and Port: "
+    $out1= adb connect $new 2>&1
+    Start-Sleep -Seconds 5
+    if ($out1 -match "connected") {
+        Write-Output "Connected to Moto"
+        return
+    }
+    else {
+        Write-Output "Unable to connect. Entering pairing mode"
+        $pair = Read-Host "Enter the IP and Port: "
+        $out2= adb pair $pair >$null 2>&1
         Start-Sleep -Seconds 5
-        if ($out1 -match "connected to") {
-            Write-Output "Connected to Moto"
+        if ($out2 -match "Successfully paired to"){
+            Write-Output "Paired and connected to Moto"
+            return
         }
-        else {
-            Write-Output "Unable to connect. Entering pairing mode"
-            $pair = Read-Host "Enter the IP and Port: "
-            $out2= adb pair $pair >$null 2>&1
-            Start-Sleep -Seconds 5
-            if ($out2 -match "Successfully paired to"){
-                Write-Output "Paired and connected to Moto"
-            }
-            else{
-                Write-Output "Please check the logs for the error"
-            }
+        else{
+            Write-Output "Please check the logs for the error"
+        }
         }
     }
-}
 
 function find{
     nano $(fzf --preview="bat --color=always {}")
