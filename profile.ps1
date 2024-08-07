@@ -1,5 +1,6 @@
 oh-my-posh init pwsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json | Invoke-Expression
-
+fnm env --use-on-cd | Out-String | Invoke-Expression
+adb devices >$null 2>&1
 function haos {
     clear
     ssh -m hmac-sha2-512-etm@openssh.com hassio@192.168.1.215
@@ -15,7 +16,7 @@ function adbi   #untested
     $url="https://dl.google.com/android/repository/platform-tools-latest-windows.zip"
     $loc= "C:\platform-tools-latest-windows.zip"
     $unziploc="C:\"
-    $comnd=adb > $null
+    $comnd=adb >$null 2>&1
     if ($comnd -match "is not recognized as an internal or external command.")
     {
         if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
@@ -37,7 +38,8 @@ function adbi   #untested
 
 function dis
 {
-    adb disconnect
+    adb disconnect >$null 2>&1
+    Write-Output "Disconnected all."
 }
 
 function phone{
@@ -48,14 +50,14 @@ function phone{
         return
     }
     $port= $args[0]
-    $out = adb connect 192.168.1.100:$port
+    $out = adb connect 192.168.1.100:$port >$null 2>&1
     Start-Sleep -Seconds 5
     if ($out -match "connected to"){
         Write-Output "Connected to Moto"
     }
     else{
         $new=Read-Host "Enter a different IP and Port: "
-        $out1= adb connect $new
+        $out1= adb connect $new >$null 2>&1
         Start-Sleep -Seconds 5
         if ($out1 -match "connected to") {
             Write-Output "Connected to Moto"
@@ -63,7 +65,7 @@ function phone{
         else {
             Write-Output "Unable to connect. Entering pairing mode"
             $pair = Read-Host "Enter the IP and Port: "
-            $out2= adb pair $pair
+            $out2= adb pair $pair >$null 2>&1
             Start-Sleep -Seconds 5
             if ($out2 -match "Successfully paired to"){
                 Write-Output "Paired and connected to Moto"
@@ -104,3 +106,4 @@ function wrt{
     clear
     ssh root@192.168.1.1
 }
+
