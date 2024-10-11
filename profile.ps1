@@ -1,16 +1,4 @@
-oh-my-posh init pwsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json | Invoke-Expression
-fnm env --use-on-cd | Out-String | Invoke-Expression
-adb devices >$null 2>&1
-function haos {
-    clear
-    ssh -m hmac-sha2-512-etm@openssh.com hassio@192.168.1.215
-}
-
-function rpi {
-    clear
-    ssh saksham@192.168.1.85
-}
-
+oh-my-posh init pwsh --config 'C:\Users\Saksham\Documents\PowerShell\theme.json' | Invoke-Expression
 function adbi   #untested
 {
     $url="https://dl.google.com/android/repository/platform-tools-latest-windows.zip"
@@ -88,10 +76,6 @@ function of{
     shutdown -s -t $sec
 }
 
-function zuku{
-    adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.sh
-}
-
 function deej{
     taskkill /IM deej.exe /F >$null 2>&1
     cd C:\Tools\Deej
@@ -116,3 +100,4 @@ function site{
     }
     npm --prefix $pro_path run dev
 }
+
