@@ -101,3 +101,8 @@ function site{
     npm --prefix $pro_path run dev
 }
 
+function dpi{
+    cd C:\Tools\goodbyedpi-0.2.2
+    .\2_any_country_dnsredir.cmd
+    exit
+}
