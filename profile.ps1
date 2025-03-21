@@ -78,7 +78,7 @@ function of{
 
 function deej{
     taskkill /IM deej.exe /F >$null 2>&1
-    cd C:\Tools\Deej
+    cd "S:\Tools\Deej"
     .\deej.exe
     cd
 }
@@ -93,7 +93,7 @@ function wrt{
 }
 
 function site{
-    $pro_path="D:\PROG\swastik-art"
+    $pro_path="S:\PROG\swastik-art"
     $del_path=Join-Path -Path $pro_path -ChildPath ".next"
     if (Test-Path -Path $del_path -PathType Container) {
         Remove-Item -Path $del_path -Recurse -Force
@@ -102,7 +102,7 @@ function site{
 }
 
 function dpi{
-    cd C:\Tools\goodbyedpi-0.2.2
-    .\2_any_country_dnsredir.cmd
+    cd S:\Tools\byedpi
+    .\dpi.cmd
     exit
 }
